@@ -2,11 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using System;
 using System.Diagnostics;
-using System.Formats.Asn1;
-using Internal.Cryptography;
+using System.Security.Cryptography;
+using Net5.Internal.Cryptography;
+using Net5.System.Formats.Asn1;
 
-namespace System.Security.Cryptography.X509Certificates
+namespace Net5.System.Security.Cryptography.X509Certificates
 {
     internal sealed class ECDsaX509SignatureGenerator : X509SignatureGenerator
     {
@@ -65,29 +67,37 @@ namespace System.Security.Cryptography.X509Certificates
                 throw new InvalidOperationException(SR.Cryptography_ECC_NamedCurvesOnly);
             }
 
-            string? curveOid = ecParameters.Curve.Oid.Value;
+            string curveOid = ecParameters.Curve.Oid.Value;
             byte[] curveOidEncoded;
 
             if (string.IsNullOrEmpty(curveOid))
             {
-                string friendlyName = ecParameters.Curve.Oid.FriendlyName!;
+                string friendlyName = ecParameters.Curve.Oid.FriendlyName;
 
                 // Translate the three curves that were supported Windows 7-8.1, but emit no Oid.Value;
                 // otherwise just wash the friendly name back through Oid to see if we can get a value.
-                curveOid = friendlyName switch
+                switch (friendlyName)
                 {
-                    "nistP256" => Oids.secp256r1,
-                    "nistP384" => Oids.secp384r1,
-                    "nistP521" => Oids.secp521r1,
-                    _ => new Oid(friendlyName).Value,
-                };
+                    case "nistP256": 
+                        curveOid = Oids.secp256r1;
+                        break;
+                    case "nistP384":
+                        curveOid = Oids.secp384r1;
+                        break;
+                    case "nistP521":
+                        curveOid = Oids.secp521r1;
+                        break;
+                    default:
+                        curveOid = new Oid(friendlyName).Value;
+                        break;
+                }
             }
 
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
-            writer.WriteObjectIdentifier(curveOid!);
+            writer.WriteObjectIdentifier(curveOid);
             curveOidEncoded = writer.Encode();
 
-            Debug.Assert(ecParameters.Q.X!.Length == ecParameters.Q.Y!.Length);
+            Debug.Assert(ecParameters.Q.X.Length == ecParameters.Q.Y.Length);
             byte[] uncompressedPoint = new byte[1 + ecParameters.Q.X.Length + ecParameters.Q.Y.Length];
 
             // Uncompressed point (0x04)

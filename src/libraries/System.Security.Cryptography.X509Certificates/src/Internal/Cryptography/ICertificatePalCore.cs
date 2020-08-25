@@ -4,12 +4,14 @@
 
 using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
+using Net5.System.Security.Cryptography;
+using Net5.System.Security.Cryptography.X509Certificates;
 using System.Text;
 using Microsoft.Win32.SafeHandles;
+using Net5.Microsoft.Win32.SafeHandles;
+using System.Security.Cryptography.X509Certificates;
 
-namespace Internal.Cryptography
+namespace Net5.Internal.Cryptography
 {
     /// <summary>Provides specific implementation for X509Certificate.</summary>
     internal interface ICertificatePalCore : IDisposable
@@ -29,6 +31,6 @@ namespace Internal.Cryptography
         DateTime NotAfter { get; }
         DateTime NotBefore { get; }
         byte[] RawData { get; }
-        byte[] Export(X509ContentType contentType, SafePasswordHandle password);
+        byte[] Export(Net5.System.Security.Cryptography.X509Certificates.X509ContentType contentType, SafePasswordHandle password);
     }
 }

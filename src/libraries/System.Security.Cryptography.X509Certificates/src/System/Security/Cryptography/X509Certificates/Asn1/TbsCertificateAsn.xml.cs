@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Formats.Asn1;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Cryptography.X509Certificates.Asn1
+namespace Net5.System.Security.Cryptography.X509Certificates.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
     internal partial struct TbsCertificateAsn
@@ -22,9 +22,9 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
         internal System.Security.Cryptography.X509Certificates.Asn1.ValidityAsn Validity;
         internal ReadOnlyMemory<byte> Subject;
         internal System.Security.Cryptography.Asn1.SubjectPublicKeyInfoAsn SubjectPublicKeyInfo;
-        internal ReadOnlyMemory<byte>? IssuerUniqueId;
-        internal ReadOnlyMemory<byte>? SubjectUniqueId;
-        internal System.Security.Cryptography.Asn1.X509ExtensionAsn[]? Extensions;
+        internal ReadOnlyMemory<byte IssuerUniqueId;
+        internal ReadOnlyMemory<byte SubjectUniqueId;
+        internal System.Security.Cryptography.Asn1.X509ExtensionAsn[ Extensions;
 
 #if DEBUG
         static TbsCertificateAsn()

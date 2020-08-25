@@ -3,13 +3,15 @@
 // See the LICENSE file in the project root for more information.
 
 using System.Collections.Generic;
-using System.Formats.Asn1;
 using System.Globalization;
 using System.Net;
-using System.Security.Cryptography.Asn1;
+using Net5.System.Security.Cryptography.Asn1;
 using System.Text;
+using System;
+using Net5.System.Formats.Asn1;
+using System.Security.Cryptography;
 
-namespace System.Security.Cryptography.X509Certificates
+namespace Net5.System.Security.Cryptography.X509Certificates
 {
     public sealed class SubjectAlternativeNameBuilder
     {

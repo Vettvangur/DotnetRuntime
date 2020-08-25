@@ -8,8 +8,7 @@ using System.Diagnostics;
 using System.Runtime.InteropServices;
 
 
-using Internal.Cryptography;
-using Internal.Cryptography.Pal.Native;
+using Net5.Internal.Cryptography.Pal.Native;
 
 internal static partial class Interop
 {

@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package >
+  <metadata>
+    <id>Net5.X509Certificates</id>
+    <version>$version$</version>
+    <title>Net5.X509Certificates</title>
+    <authors>Gunnar Már Óttarsson, Vettvangur</authors>
+    <owners>Vettvangur</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <projectUrl>https://github.com/Vettvangur/DotnetRuntime</projectUrl>
+    <icon>images\VV_Logo.png</icon>
+    <description>Net5 X509Certificates Back ported to Net472</description>
+    <releaseNotes>Initial release.</releaseNotes>
+    <copyright>Copyright 2020</copyright>
+    <tags></tags>
+    <dependencies>
+      <dependency id="System.Memory" version="[4.5.0,)" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="..\VV_Logo.png" target="images\" />
+  </files>
+</package>

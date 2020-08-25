@@ -2,11 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Internal.Cryptography.Pal;
+using Net5.Internal.Cryptography.Pal;
+using System;
 using System.Diagnostics;
 using System.Globalization;
+using System.Security.Cryptography;
 
-namespace System.Security.Cryptography.X509Certificates
+namespace Net5.System.Security.Cryptography.X509Certificates
 {
     public sealed class X509Store : IDisposable
     {
@@ -15,7 +17,7 @@ namespace System.Security.Cryptography.X509Certificates
         internal const string DisallowedStoreName = "Disallowed";
         internal const string MyStoreName = "My";
 
-        private IStorePal? _storePal;
+        private IStorePal _storePal;
 
         public X509Store()
             : this("MY", StoreLocation.CurrentUser)
@@ -102,13 +104,13 @@ namespace System.Security.Cryptography.X509Certificates
 
         public StoreLocation Location { get; private set; }
 
-        public string? Name { get; private set; }
+        public string Name { get; private set; }
 
 
         public void Open(OpenFlags flags)
         {
             Close();
-            _storePal = StorePal.FromSystemStore(Name!, Location, flags);
+            _storePal = StorePal.FromSystemStore(Name, Location, flags);
         }
 
         public X509Certificate2Collection Certificates
@@ -217,7 +219,7 @@ namespace System.Security.Cryptography.X509Certificates
 
         public void Close()
         {
-            IStorePal? storePal = _storePal;
+            IStorePal storePal = _storePal;
             _storePal = null;
             if (storePal != null)
             {

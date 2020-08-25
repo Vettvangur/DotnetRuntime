@@ -7,7 +7,7 @@ using System;
 using System.Formats.Asn1;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Cryptography.X509Certificates.Asn1
+namespace Net5.System.Security.Cryptography.X509Certificates.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
     internal partial struct TimeAsn
@@ -103,7 +103,7 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             {
                 decoded.GeneralTime = reader.ReadGeneralizedTime();
 
-                if (decoded.GeneralTime!.Value.Ticks % TimeSpan.TicksPerSecond != 0)
+                if (decoded.GeneralTime.Value.Ticks % TimeSpan.TicksPerSecond != 0)
                 {
                     throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
                 }

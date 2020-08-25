@@ -2,10 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using Net5.System.Formats.Asn1;
+using System;
 using System.Diagnostics;
-using System.Formats.Asn1;
+using System.Security.Cryptography;
 
-namespace System.Security.Cryptography.X509Certificates
+namespace Net5.System.Security.Cryptography.X509Certificates
 {
     internal sealed class RSAPkcs1X509SignatureGenerator : X509SignatureGenerator
     {

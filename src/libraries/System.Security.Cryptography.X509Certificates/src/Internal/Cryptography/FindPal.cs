@@ -8,8 +8,14 @@ using System.Diagnostics;
 using System.Numerics;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using Net5.System;
+using Net5.System.Security.Cryptography;
+using Net5.System.Security.Cryptography.X509Certificates;
+using X509Certificate2Collection = Net5.System.Security.Cryptography.X509Certificates.X509Certificate2Collection;
+using X509KeyUsageFlags = Net5.System.Security.Cryptography.X509Certificates.X509KeyUsageFlags;
+using X509FindType = Net5.System.Security.Cryptography.X509Certificates.X509FindType;
 
-namespace Internal.Cryptography.Pal
+namespace Net5.Internal.Cryptography.Pal
 {
     internal partial class FindPal
     {

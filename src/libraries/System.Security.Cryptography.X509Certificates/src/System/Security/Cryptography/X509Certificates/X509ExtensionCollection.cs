@@ -10,10 +10,9 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 
-using Internal.Cryptography;
-
-namespace System.Security.Cryptography.X509Certificates
+namespace Net5.System.Security.Cryptography.X509Certificates
 {
     public sealed class X509ExtensionCollection : ICollection, IEnumerable
     {
@@ -49,14 +48,14 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        public X509Extension? this[string oid]
+        public X509Extension this[string oid]
         {
             get
             {
-                string? oidValue = new Oid(oid).Value;
+                string oidValue = new Oid(oid).Value;
                 foreach (X509Extension extension in _list)
                 {
-                    if (string.Equals(extension.Oid!.Value, oidValue, StringComparison.OrdinalIgnoreCase))
+                    if (string.Equals(extension.Oid.Value, oidValue, StringComparison.OrdinalIgnoreCase))
                         return extension;
                 }
                 return null;

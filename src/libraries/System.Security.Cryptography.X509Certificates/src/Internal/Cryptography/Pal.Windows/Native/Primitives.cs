@@ -6,7 +6,7 @@ using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 
-namespace Internal.Cryptography.Pal.Native
+namespace Net5.Internal.Cryptography.Pal.Native
 {
     internal enum CertQueryObjectType : int
     {

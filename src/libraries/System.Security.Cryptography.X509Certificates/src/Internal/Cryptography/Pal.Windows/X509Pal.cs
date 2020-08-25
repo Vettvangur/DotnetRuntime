@@ -8,13 +8,12 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-using Internal.Cryptography;
-using Internal.Cryptography.Pal.Native;
+using Net5.Internal.Cryptography.Pal.Native;
 
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
+using Net5.System.Security.Cryptography;
+using Net5.System.Security.Cryptography.X509Certificates;
 
-namespace Internal.Cryptography.Pal
+namespace Net5.Internal.Cryptography.Pal
 {
     /// <summary>
     /// A singleton class that encapsulates the native implementation of various X509 services. (Implementing this as a singleton makes it

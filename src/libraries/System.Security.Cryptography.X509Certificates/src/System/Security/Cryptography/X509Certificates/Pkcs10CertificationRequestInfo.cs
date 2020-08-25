@@ -6,11 +6,14 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Formats.Asn1;
-using System.Security.Cryptography.Asn1;
-using System.Security.Cryptography.X509Certificates.Asn1;
+using Net5.System.Security.Cryptography.Asn1;
+using Net5.System.Security.Cryptography.X509Certificates.Asn1;
 using Internal.Cryptography;
+using System.Security.Cryptography;
+using System;
+using Net5.System.Formats.Asn1;
 
-namespace System.Security.Cryptography.X509Certificates
+namespace Net5.System.Security.Cryptography.X509Certificates
 {
     internal class Pkcs10CertificationRequestInfo
     {
@@ -55,7 +58,7 @@ namespace System.Security.Cryptography.X509Certificates
             }
 
             SubjectPublicKeyInfoAsn spki = default;
-            spki.Algorithm = new AlgorithmIdentifierAsn { Algorithm = PublicKey.Oid!.Value!, Parameters = PublicKey.EncodedParameters.RawData };
+            spki.Algorithm = new AlgorithmIdentifierAsn { Algorithm = PublicKey.Oid.Value, Parameters = PublicKey.EncodedParameters.RawData };
             spki.SubjectPublicKey = PublicKey.EncodedKeyValue.RawData;
 
             var attributes = new AttributeAsn[Attributes.Count];

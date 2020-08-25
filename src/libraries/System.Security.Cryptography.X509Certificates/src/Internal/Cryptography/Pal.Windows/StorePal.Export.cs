@@ -2,15 +2,18 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Internal.Cryptography.Pal.Native;
+using Net5.Internal.Cryptography.Pal.Native;
 using Microsoft.Win32.SafeHandles;
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using Net5.System.Security.Cryptography;
+using Net5.System.Security.Cryptography.X509Certificates;
+using Net5.Microsoft.Win32.SafeHandles;
 using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
+using Net5.System;
 
-namespace Internal.Cryptography.Pal
+namespace Net5.Internal.Cryptography.Pal
 {
     internal sealed partial class StorePal : IDisposable, IStorePal, IExportPal, ILoaderPal
     {
@@ -22,14 +25,14 @@ namespace Internal.Cryptography.Pal
             Dispose();
         }
 
-        public byte[]? Export(X509ContentType contentType, SafePasswordHandle password)
+        public byte[] Export(X509ContentType contentType, SafePasswordHandle password)
         {
             Debug.Assert(password != null);
             switch (contentType)
             {
                 case X509ContentType.Cert:
                     {
-                        SafeCertContextHandle? pCertContext = null;
+                        SafeCertContextHandle pCertContext = null;
                         if (!Interop.crypt32.CertEnumCertificatesInStore(_certStore, ref pCertContext))
                             return null;
                         try
@@ -50,7 +53,7 @@ namespace Internal.Cryptography.Pal
 
                 case X509ContentType.SerializedCert:
                     {
-                        SafeCertContextHandle? pCertContext = null;
+                        SafeCertContextHandle pCertContext = null;
                         if (!Interop.crypt32.CertEnumCertificatesInStore(_certStore, ref pCertContext))
                             return null;
 

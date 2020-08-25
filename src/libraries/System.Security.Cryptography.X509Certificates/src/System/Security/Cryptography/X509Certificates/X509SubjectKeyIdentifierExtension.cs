@@ -9,10 +9,12 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-using Internal.Cryptography;
-using Internal.Cryptography.Pal;
+using System.Security.Cryptography;
+using Net5.Internal.Cryptography.Pal;
+using Net5.Internal.Cryptography;
+using System.Diagnostics.CodeAnalysis;
 
-namespace System.Security.Cryptography.X509Certificates
+namespace Net5.System.Security.Cryptography.X509Certificates
 {
     public sealed class X509SubjectKeyIdentifierExtension : X509Extension
     {
@@ -48,7 +50,7 @@ namespace System.Security.Cryptography.X509Certificates
         {
         }
 
-        public string? SubjectKeyIdentifier
+        public string SubjectKeyIdentifier
         {
             get
             {
@@ -126,7 +128,7 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA5350", Justification = "SHA1 is required by RFC3280")]
+        [SuppressMessage("Microsoft.Security", "CA5350", Justification = "SHA1 is required by RFC3280")]
         private static byte[] ComputeSha1(byte[] data)
         {
             using (SHA1 sha1 = SHA1.Create())
@@ -135,7 +137,7 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        private string? _subjectKeyIdentifier;
+        private string _subjectKeyIdentifier;
         private bool _decoded;
     }
 }

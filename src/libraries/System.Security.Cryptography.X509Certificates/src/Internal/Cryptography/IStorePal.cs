@@ -4,15 +4,15 @@
 
 using System;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography.X509Certificates;
+using Net5.System.Security.Cryptography.X509Certificates;
 
-namespace Internal.Cryptography.Pal
+namespace Net5.Internal.Cryptography.Pal
 {
     internal interface IStorePal : IDisposable
     {
         void CloneTo(X509Certificate2Collection collection);
         void Add(ICertificatePal cert);
         void Remove(ICertificatePal cert);
-        SafeHandle? SafeHandle { get; }
+        SafeHandle SafeHandle { get; }
     }
 }

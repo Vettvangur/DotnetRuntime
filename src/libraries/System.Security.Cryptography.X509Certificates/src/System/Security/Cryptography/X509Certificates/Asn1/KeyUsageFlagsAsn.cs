@@ -5,7 +5,7 @@
 using System;
 using System.Diagnostics;
 
-namespace System.Security.Cryptography.X509Certificates.Asn1
+namespace Net5.System.Security.Cryptography.X509Certificates.Asn1
 {
     // https://tools.ietf.org/html/rfc3280#section-4.2.1.3
     //

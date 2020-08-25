@@ -4,7 +4,7 @@
 
 using System.Collections;
 
-namespace System.Security.Cryptography.X509Certificates
+namespace Net5.System.Security.Cryptography.X509Certificates
 {
     public sealed class X509ExtensionEnumerator : IEnumerator
     {

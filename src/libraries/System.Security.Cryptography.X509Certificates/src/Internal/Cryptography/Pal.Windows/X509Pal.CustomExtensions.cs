@@ -9,13 +9,13 @@ using System.Globalization;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
-using Internal.Cryptography;
-using Internal.Cryptography.Pal.Native;
+using Net5.Internal.Cryptography.Pal.Native;
 
+using Net5.System.Security.Cryptography;
+using Net5.System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
 
-namespace Internal.Cryptography.Pal
+namespace Net5.Internal.Cryptography.Pal
 {
     /// <summary>
     /// A singleton class that encapsulates the native implementation of various X509 services. (Implementing this as a singleton makes it
@@ -178,7 +178,7 @@ namespace Internal.Cryptography.Pal
                         for (int i = 0; i < count; i++)
                         {
                             IntPtr oidValuePointer = pEnhKeyUsage->rgpszUsageIdentifier[i];
-                            string oidValue = Marshal.PtrToStringAnsi(oidValuePointer)!;
+                            string oidValue = Marshal.PtrToStringAnsi(oidValuePointer);
                             Oid oid = new Oid(oidValue);
                             localUsages.Add(oid);
                         }
@@ -205,7 +205,7 @@ namespace Internal.Cryptography.Pal
         {
             unsafe
             {
-                byte[] localSubjectKeyIdentifier = null!;
+                byte[] localSubjectKeyIdentifier = null;
                 encoded.DecodeObject(
                     Oids.SubjectKeyIdentifier,
                     delegate (void* pvDecoded, int cbDecoded)

@@ -5,11 +5,12 @@
 using System;
 using System.Text;
 using System.Diagnostics;
-using System.Security.Cryptography.X509Certificates;
+using Net5.System.Security.Cryptography.X509Certificates;
 
-using Internal.Cryptography.Pal.Native;
+using Net5.Internal.Cryptography.Pal.Native;
+using Net5.System;
 
-namespace Internal.Cryptography.Pal
+namespace Net5.Internal.Cryptography.Pal
 {
     internal sealed partial class ChainPal : IDisposable, IChainPal
     {

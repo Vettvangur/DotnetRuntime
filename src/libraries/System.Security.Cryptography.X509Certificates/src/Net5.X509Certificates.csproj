@@ -1,0 +1,235 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{10111DBD-F92F-45DD-94EB-470B18CBF63E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Net5</RootNamespace>
+    <AssemblyName>Net5.X509Certificates</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;NET45</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>CS3021</NoWarn>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;NET45</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Buffers, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Buffers.4.5.1\lib\net461\System.Buffers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Memory, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Memory.4.5.0\lib\netstandard2.0\System.Memory.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Numerics.Vectors.4.5.0\lib\net46\System.Numerics.Vectors.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe, Version=4.0.4.1, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.5.3\lib\net461\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\Internal\Cryptography\AsymmetricAlgorithmHelpers.Der.cs" />
+    <Compile Include="Common\Internal\Cryptography\Windows\CryptoThrowHelper.cs" />
+    <Compile Include="Common\Internal\Windows\kernel32\Interop.FormatMessage.cs" />
+    <Compile Include="Common\Interop\Windows\BCrypt\Interop.BCryptDestroyKey.cs" />
+    <Compile Include="Common\Interop\Windows\BCrypt\Interop.BCryptExportKey.cs" />
+    <Compile Include="Common\Interop\Windows\BCrypt\Interop.BCryptGetProperty.cs" />
+    <Compile Include="Common\Interop\Windows\BCrypt\Interop.Blobs.cs" />
+    <Compile Include="Common\Interop\Windows\BCrypt\Interop.NTSTATUS.cs" />
+    <Compile Include="Common\Interop\Windows\Crypt32\Interop.CertCloseStore.cs" />
+    <Compile Include="Common\Interop\Windows\Crypt32\Interop.CertFreeCertificateContext.cs" />
+    <Compile Include="Common\Interop\Windows\Crypt32\Interop.CertNameToStr.cs" />
+    <Compile Include="Common\Interop\Windows\Crypt32\Interop.CryptFormatObject.cs" />
+    <Compile Include="Common\Interop\Windows\Crypt32\Interop.CryptMsgClose.cs" />
+    <Compile Include="Common\Interop\Windows\Crypt32\Interop.FindOidInfo.cs" />
+    <Compile Include="Common\System\Security\Cryptography\Asn1Reader\AsnValueReader.cs" />
+    <Compile Include="Common\System\Security\Cryptography\Asn1\AlgorithmIdentifierAsn.xml.cs" />
+    <Compile Include="Common\System\Security\Cryptography\Asn1\AttributeAsn.manual.cs" />
+    <Compile Include="Common\System\Security\Cryptography\Asn1\AttributeAsn.xml.cs" />
+    <Compile Include="Common\System\Security\Cryptography\Asn1\DirectoryStringAsn.xml.cs" />
+    <Compile Include="Common\System\Security\Cryptography\Asn1\OtherNameAsn.xml.cs" />
+    <Compile Include="Common\System\Security\Cryptography\Asn1\X509ExtensionAsn.manual.cs" />
+    <Compile Include="Common\System\Security\Cryptography\Asn1\X509ExtensionAsn.xml.cs" />
+    <Compile Include="Common\System\Security\Cryptography\CryptoPool.cs" />
+    <Compile Include="Common\System\Security\Cryptography\KeySizeHelpers.cs" />
+    <Compile Include="Common\System\Security\Cryptography\Oids.cs" />
+    <Compile Include="Common\System\Security\HexConverter.cs" />
+    <Compile Include="Internal\Cryptography\CertificateExtensionsCommon.cs" />
+    <Compile Include="Internal\Cryptography\ErrorCode.cs" />
+    <Compile Include="Internal\Cryptography\FindPal.cs" />
+    <Compile Include="Internal\Cryptography\Helpers.cs" />
+    <Compile Include="Internal\Cryptography\ICertificatePal.cs" />
+    <Compile Include="Internal\Cryptography\ICertificatePalCore.cs" />
+    <Compile Include="Internal\Cryptography\IExportPal.cs" />
+    <Compile Include="Internal\Cryptography\IFindPal.cs" />
+    <Compile Include="Internal\Cryptography\ILoaderPal.cs" />
+    <Compile Include="Internal\Cryptography\IStorePal.cs" />
+    <Compile Include="Internal\Cryptography\IX509Pal.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\CertificatePal.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\CertificatePal.Import.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\CertificatePal.PrivateKey.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\ChainPal.BuildChain.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\ChainPal.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\ChainPal.GetChainStatusInformation.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\FindPal.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\Native\Helpers.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\Native\Interop.crypt32.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\Native\Interop.cryptoapi.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\Native\Primitives.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\Native\SafeHandles.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\StorePal.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\StorePal.Export.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\StorePal.Import.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\X509Pal.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\X509Pal.CustomExtensions.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\X509Pal.GetCertContentType.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\X509Pal.PublicKey.cs" />
+    <Compile Include="Internal\Cryptography\Pal.Windows\X509Pal.X500DistinguishedName.cs" />
+    <Compile Include="Microsoft\Win32\SafeHandles\SafeBCryptHandle.cs" />
+    <Compile Include="Microsoft\Win32\SafeHandles\SafeBCryptKeyHandle.cs" />
+    <Compile Include="Microsoft\Win32\SafeHandles\SafeHandleCache.cs" />
+    <Compile Include="Microsoft\Win32\SafeHandles\SafePasswordHandle.cs" />
+    <Compile Include="Microsoft\Win32\SafeHandles\SafeX509ChainHandle.cs" />
+    <Compile Include="SR.cs" />
+    <Compile Include="Internal\Cryptography\IChainPal.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="System\Formats\Asn1\Asn1Tag.Accelerators.cs" />
+    <Compile Include="System\Formats\Asn1\Asn1Tag.cs" />
+    <Compile Include="System\Formats\Asn1\AsnCharacterStringEncodings.cs" />
+    <Compile Include="System\Formats\Asn1\AsnContentException.cs" />
+    <Compile Include="System\Formats\Asn1\AsnDecoder.BitString.cs" />
+    <Compile Include="System\Formats\Asn1\AsnDecoder.Boolean.cs" />
+    <Compile Include="System\Formats\Asn1\AsnDecoder.cs" />
+    <Compile Include="System\Formats\Asn1\AsnDecoder.Enumerated.cs" />
+    <Compile Include="System\Formats\Asn1\AsnDecoder.GeneralizedTime.cs" />
+    <Compile Include="System\Formats\Asn1\AsnDecoder.Integer.cs" />
+    <Compile Include="System\Formats\Asn1\AsnDecoder.NamedBitList.cs" />
+    <Compile Include="System\Formats\Asn1\AsnDecoder.Null.cs" />
+    <Compile Include="System\Formats\Asn1\AsnDecoder.OctetString.cs" />
+    <Compile Include="System\Formats\Asn1\AsnDecoder.Oid.cs" />
+    <Compile Include="System\Formats\Asn1\AsnDecoder.Sequence.cs" />
+    <Compile Include="System\Formats\Asn1\AsnDecoder.SetOf.cs" />
+    <Compile Include="System\Formats\Asn1\AsnDecoder.Text.cs" />
+    <Compile Include="System\Formats\Asn1\AsnDecoder.UtcTime.cs" />
+    <Compile Include="System\Formats\Asn1\AsnEncodingRules.cs" />
+    <Compile Include="System\Formats\Asn1\AsnReaderOptions.cs" />
+    <Compile Include="System\Formats\Asn1\AsnWriter.BitString.cs" />
+    <Compile Include="System\Formats\Asn1\AsnWriter.Boolean.cs" />
+    <Compile Include="System\Formats\Asn1\AsnWriter.cs" />
+    <Compile Include="System\Formats\Asn1\AsnWriter.Enumerated.cs" />
+    <Compile Include="System\Formats\Asn1\AsnWriter.GeneralizedTime.cs" />
+    <Compile Include="System\Formats\Asn1\AsnWriter.Integer.cs" />
+    <Compile Include="System\Formats\Asn1\AsnWriter.NamedBitList.cs" />
+    <Compile Include="System\Formats\Asn1\AsnWriter.Null.cs" />
+    <Compile Include="System\Formats\Asn1\AsnWriter.OctetString.cs" />
+    <Compile Include="System\Formats\Asn1\AsnWriter.Oid.cs" />
+    <Compile Include="System\Formats\Asn1\AsnWriter.Sequence.cs" />
+    <Compile Include="System\Formats\Asn1\AsnWriter.SetOf.cs" />
+    <Compile Include="System\Formats\Asn1\AsnWriter.Text.cs" />
+    <Compile Include="System\Formats\Asn1\AsnWriter.UtcTime.cs" />
+    <Compile Include="System\Formats\Asn1\SetOfValueComparer.cs" />
+    <Compile Include="System\Formats\Asn1\TagClass.cs" />
+    <Compile Include="System\Formats\Asn1\UniversalTagNumber.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\DSACertificateExtensions.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\ECDsaCertificateExtensions.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\OpenFlags.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\PublicKey.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\RSACertificateExtensions.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\StoreLocation.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\StoreName.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X500DistinguishedName.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X500DistinguishedNameFlags.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X501Attribute.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509BasicConstraintsExtension.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509Certificate.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509Certificate2.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509Certificate2Collection.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509Certificate2Enumerator.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509CertificateCollection.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509CertificateEnumerator.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509Chain.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509ChainElement.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509ChainElementCollection.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509ChainElementEnumerator.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509ChainPolicy.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509ChainStatus.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509ChainStatusFlags.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509ChainTrustMode.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509ContentType.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509EnhancedKeyUsageExtension.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509Extension.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509ExtensionCollection.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509ExtensionEnumerator.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509FindType.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509IncludeOption.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509KeyStorageFlags.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509KeyUsageExtension.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509KeyUsageFlags.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509NameType.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509RevocationFlag.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509RevocationMode.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509SubjectKeyIdentifierExtension.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509SubjectKeyIdentifierHashAlgorithm.cs" />
+    <Compile Include="System\Security\Cryptography\X509Certificates\X509VerificationFlags.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="System.SR.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Interop.Libraries.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="Common\System\Security\Cryptography\Asn1\asn.xsd">
+      <SubType>Designer</SubType>
+    </None>
+    <Compile Include="System.Formats.Asn1.SR.cs" />
+    <None Include="Net5.X509Certificates.nuspec" />
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Common\System\Security\Cryptography\Asn1\AlgorithmIdentifierAsn.xml" />
+    <Content Include="Common\System\Security\Cryptography\Asn1\AttributeAsn.xml" />
+    <Content Include="Common\System\Security\Cryptography\Asn1\DirectoryStringAsn.xml" />
+    <Content Include="Common\System\Security\Cryptography\Asn1\EdiPartyNameAsn.xml" />
+    <Content Include="Common\System\Security\Cryptography\Asn1\GeneralNameAsn.xml" />
+    <Content Include="Common\System\Security\Cryptography\Asn1\OtherNameAsn.xml" />
+    <Content Include="Common\System\Security\Cryptography\Asn1\PssParamsAsn.xml" />
+    <Content Include="Common\System\Security\Cryptography\Asn1\SubjectPublicKeyInfoAsn.xml" />
+    <Content Include="Common\System\Security\Cryptography\Asn1\X509ExtensionAsn.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\Strings.resx" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

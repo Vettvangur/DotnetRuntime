@@ -6,8 +6,10 @@ using System;
 using System.Numerics;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
+using Net5.System.Security.Cryptography;
+using Net5.System.Security.Cryptography.X509Certificates;
 
-namespace Internal.Cryptography.Pal
+namespace Net5.Internal.Cryptography.Pal
 {
     internal interface IFindPal : IDisposable
     {
@@ -26,7 +28,7 @@ namespace Internal.Cryptography.Pal
         void FindByApplicationPolicy(string oidValue);
         void FindByCertificatePolicy(string oidValue);
         void FindByExtension(string oidValue);
-        void FindByKeyUsage(X509KeyUsageFlags keyUsage);
+        void FindByKeyUsage(Net5.System.Security.Cryptography.X509Certificates.X509KeyUsageFlags keyUsage);
         void FindBySubjectKeyIdentifier(byte[] keyIdentifier);
     }
 }

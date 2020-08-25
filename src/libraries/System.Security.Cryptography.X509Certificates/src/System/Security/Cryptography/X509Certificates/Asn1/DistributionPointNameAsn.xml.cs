@@ -8,13 +8,13 @@ using System.Collections.Generic;
 using System.Formats.Asn1;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Cryptography.X509Certificates.Asn1
+namespace Net5.System.Security.Cryptography.X509Certificates.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
     internal partial struct DistributionPointNameAsn
     {
-        internal System.Security.Cryptography.Asn1.GeneralNameAsn[]? FullName;
-        internal ReadOnlyMemory<byte>? NameRelativeToCRLIssuer;
+        internal System.Security.Cryptography.Asn1.GeneralNameAsn[ FullName;
+        internal ReadOnlyMemory<byte NameRelativeToCRLIssuer;
 
 #if DEBUG
         static DistributionPointNameAsn()
@@ -22,7 +22,7 @@ namespace System.Security.Cryptography.X509Certificates.Asn1
             var usedTags = new System.Collections.Generic.Dictionary<Asn1Tag, string>();
             Action<Asn1Tag, string> ensureUniqueTag = (tag, fieldName) =>
             {
-                if (usedTags.TryGetValue(tag, out string? existing))
+                if (usedTags.TryGetValue(tag, out string existing))
                 {
                     throw new InvalidOperationException($"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'");
                 }

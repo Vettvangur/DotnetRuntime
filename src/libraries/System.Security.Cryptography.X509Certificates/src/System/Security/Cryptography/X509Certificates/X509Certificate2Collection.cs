@@ -2,10 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Internal.Cryptography.Pal;
 using Microsoft.Win32.SafeHandles;
+using Net5.Internal.Cryptography.Pal;
+using Net5.Microsoft.Win32.SafeHandles;
+using System;
+using System.Security.Cryptography.X509Certificates;
 
-namespace System.Security.Cryptography.X509Certificates
+namespace Net5.System.Security.Cryptography.X509Certificates
 {
     public class X509Certificate2Collection : X509CertificateCollection
     {
@@ -103,12 +106,12 @@ namespace System.Security.Cryptography.X509Certificates
             return base.Contains(certificate);
         }
 
-        public byte[]? Export(X509ContentType contentType)
+        public byte[] Export(X509ContentType contentType)
         {
             return Export(contentType, password: null);
         }
 
-        public byte[]? Export(X509ContentType contentType, string? password)
+        public byte[] Export(X509ContentType contentType, string password)
         {
             using (var safePasswordHandle = new SafePasswordHandle(password))
             using (IExportPal storePal = StorePal.LinkFromCertificateCollection(this))
@@ -135,7 +138,7 @@ namespace System.Security.Cryptography.X509Certificates
             Import(rawData, password: null, keyStorageFlags: X509KeyStorageFlags.DefaultKeySet);
         }
 
-        public void Import(byte[] rawData, string? password, X509KeyStorageFlags keyStorageFlags)
+        public void Import(byte[] rawData, string password, X509KeyStorageFlags keyStorageFlags)
         {
             if (rawData == null)
                 throw new ArgumentNullException(nameof(rawData));
@@ -154,7 +157,7 @@ namespace System.Security.Cryptography.X509Certificates
             Import(fileName, password: null, keyStorageFlags: X509KeyStorageFlags.DefaultKeySet);
         }
 
-        public void Import(string fileName, string? password, X509KeyStorageFlags keyStorageFlags)
+        public void Import(string fileName, string password, X509KeyStorageFlags keyStorageFlags)
         {
             if (fileName == null)
                 throw new ArgumentNullException(nameof(fileName));

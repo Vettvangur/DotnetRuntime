@@ -6,9 +6,11 @@ using Microsoft.Win32.SafeHandles;
 using System;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
+using Net5.System.Security.Cryptography;
 using System.Security.Cryptography;
+using Net5.Microsoft.Win32.SafeHandles;
 
-namespace Internal.Cryptography.Pal.Native
+namespace Net5.Internal.Cryptography.Pal.Native
 {
     /// <summary>
     /// Base class for safe handles representing NULL-based pointers.
@@ -44,7 +46,7 @@ namespace Internal.Cryptography.Pal.Native
     /// </summary>
     internal class SafeCertContextHandle : SafePointerHandle<SafeCertContextHandle>
     {
-        private SafeCertContextHandle? _parent;
+        private SafeCertContextHandle _parent;
 
         public SafeCertContextHandle() { }
 
@@ -165,8 +167,8 @@ namespace Internal.Cryptography.Pal.Native
                         // dwProvType being 0 indicates that the key is stored in CNG.
                         // dwProvType being non-zero indicates that the key is stored in CAPI.
 
-                        string providerName = Marshal.PtrToStringUni((IntPtr)(pProvInfo->pwszProvName))!;
-                        string keyContainerName = Marshal.PtrToStringUni((IntPtr)(pProvInfo->pwszContainerName))!;
+                        string providerName = Marshal.PtrToStringUni((IntPtr)(pProvInfo->pwszProvName));
+                        string keyContainerName = Marshal.PtrToStringUni((IntPtr)(pProvInfo->pwszContainerName));
 
                         try
                         {

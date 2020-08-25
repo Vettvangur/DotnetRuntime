@@ -2,14 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Internal.Cryptography.Pal.Native;
-using Microsoft.Win32.SafeHandles;
+using Net5.Internal.Cryptography.Pal.Native;
+using Net5.Microsoft.Win32.SafeHandles;
+using Net5.System;
 using System;
 using System.Runtime.InteropServices;
+using Net5.System.Security.Cryptography;
+using Net5.System.Security.Cryptography.X509Certificates;
 using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
 
-namespace Internal.Cryptography.Pal
+namespace Net5.Internal.Cryptography.Pal
 {
     internal sealed partial class ChainPal : IDisposable, IChainPal
     {
@@ -31,7 +33,7 @@ namespace Internal.Cryptography.Pal
         /// <summary>
         /// Does not throw on api error. Returns default(bool?) and sets "exception" instead.
         /// </summary>
-        public bool? Verify(X509VerificationFlags flags, out Exception? exception)
+        public bool? Verify(X509VerificationFlags flags, out Exception exception)
         {
             exception = null;
 
@@ -70,7 +72,7 @@ namespace Internal.Cryptography.Pal
 
                         X509Certificate2 certificate = new X509Certificate2((IntPtr)(pChainElement->pCertContext));
                         X509ChainStatus[] chainElementStatus = GetChainStatusInformation(pChainElement->TrustStatus.dwErrorStatus);
-                        string information = Marshal.PtrToStringUni(pChainElement->pwszExtendedErrorInfo)!;
+                        string information = Marshal.PtrToStringUni(pChainElement->pwszExtendedErrorInfo);
 
                         X509ChainElement chainElement = new X509ChainElement(certificate, chainElementStatus, information);
                         chainElements[i] = chainElement;
@@ -112,8 +114,8 @@ namespace Internal.Cryptography.Pal
 
         public void Dispose()
         {
-            SafeX509ChainHandle? chain = _chain;
-            _chain = null!;
+            SafeX509ChainHandle chain = _chain;
+            _chain = null;
             if (chain != null)
                 chain.Dispose();
         }

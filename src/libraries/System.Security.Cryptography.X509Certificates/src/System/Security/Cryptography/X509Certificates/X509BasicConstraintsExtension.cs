@@ -9,10 +9,10 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-using Internal.Cryptography;
-using Internal.Cryptography.Pal;
+using System.Security.Cryptography;
+using Net5.Internal.Cryptography.Pal;
 
-namespace System.Security.Cryptography.X509Certificates
+namespace Net5.System.Security.Cryptography.X509Certificates
 {
     public sealed class X509BasicConstraintsExtension : X509Extension
     {
@@ -81,7 +81,7 @@ namespace System.Security.Cryptography.X509Certificates
 
         private void DecodeExtension()
         {
-            if (Oid!.Value == Oids.BasicConstraints)
+            if (Oid.Value == Oids.BasicConstraints)
                 X509Pal.Instance.DecodeX509BasicConstraintsExtension(RawData, out _certificateAuthority, out _hasPathLenConstraint, out _pathLenConstraint);
             else
                 X509Pal.Instance.DecodeX509BasicConstraints2Extension(RawData, out _certificateAuthority, out _hasPathLenConstraint, out _pathLenConstraint);

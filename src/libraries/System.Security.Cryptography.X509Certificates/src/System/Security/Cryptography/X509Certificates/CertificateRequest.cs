@@ -5,12 +5,12 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
-using System.Formats.Asn1;
-using System.Security.Cryptography.Asn1;
-using System.Security.Cryptography.X509Certificates.Asn1;
-using Internal.Cryptography;
+using Net5.System.Security.Cryptography.Asn1;
+using Net5.System.Security.Cryptography.X509Certificates.Asn1;
+using System.Security.Cryptography;
+using System;
 
-namespace System.Security.Cryptography.X509Certificates
+namespace Net5.System.Security.Cryptography.X509Certificates
 {
     /// <summary>
     /// Represents an abstraction over the PKCS#10 CertificationRequestInfo and the X.509 TbsCertificate,
@@ -19,9 +19,9 @@ namespace System.Security.Cryptography.X509Certificates
     /// </summary>
     public sealed class CertificateRequest
     {
-        private readonly AsymmetricAlgorithm? _key;
-        private readonly X509SignatureGenerator? _generator;
-        private readonly RSASignaturePadding? _rsaPadding;
+        private readonly AsymmetricAlgorithm _key;
+        private readonly X509SignatureGenerator _generator;
+        private readonly RSASignaturePadding _rsaPadding;
 
         /// <summary>
         /// The X.500 Distinguished Name to use as the Subject in a created certificate or certificate request.
@@ -310,6 +310,13 @@ namespace System.Security.Cryptography.X509Certificates
             Debug.Assert(_generator != null);
 
             byte[] serialNumber = new byte[8];
+            //unsafe
+            //{
+            //    if (serialNumber.Length > 0)
+            //    {
+            //        fixed (byte* ptr = serialNumber) Interop.BCrypt.BCryptGenRandom(IntPtr.Zero, pbBuffer, count, Interop.BCrypt.BCRYPT_USE_SYSTEM_PREFERRED_RNG);
+            //    }
+            //}
             RandomNumberGenerator.Fill(serialNumber);
 
             using (X509Certificate2 certificate = Create(
@@ -319,14 +326,14 @@ namespace System.Security.Cryptography.X509Certificates
                 notAfter,
                 serialNumber))
             {
-                RSA? rsa = _key as RSA;
+                RSA rsa = _key as RSA;
 
                 if (rsa != null)
                 {
                     return certificate.CopyWithPrivateKey(rsa);
                 }
 
-                ECDsa? ecdsa = _key as ECDsa;
+                ECDsa ecdsa = _key as ECDsa;
 
                 if (ecdsa != null)
                 {
@@ -439,8 +446,8 @@ namespace System.Security.Cryptography.X509Certificates
             // to determine if a chain is valid; and a user can easily call the X509SignatureGenerator overload to
             // bypass this validation.  We're simply helping them at signing time understand that they've
             // chosen the wrong cert.
-            var basicConstraints = (X509BasicConstraintsExtension?)issuerCertificate.Extensions[Oids.BasicConstraints2];
-            var keyUsage = (X509KeyUsageExtension?)issuerCertificate.Extensions[Oids.KeyUsage];
+            var basicConstraints = (X509BasicConstraintsExtensio)issuerCertificate.Extensions[Oids.BasicConstraints2];
+            var keyUsage = (X509KeyUsageExtensio)issuerCertificate.Extensions[Oids.KeyUsage];
 
             if (basicConstraints == null)
                 throw new ArgumentException(SR.Cryptography_CertReq_BasicConstraintsRequired, nameof(issuerCertificate));
@@ -449,7 +456,7 @@ namespace System.Security.Cryptography.X509Certificates
             if (keyUsage != null && (keyUsage.KeyUsages & X509KeyUsageFlags.KeyCertSign) == 0)
                 throw new ArgumentException(SR.Cryptography_CertReq_IssuerKeyUsageInvalid, nameof(issuerCertificate));
 
-            AsymmetricAlgorithm? key = null;
+            AsymmetricAlgorith key = null;
             string keyAlgorithm = issuerCertificate.GetKeyAlgorithm();
             X509SignatureGenerator generator;
 
@@ -463,12 +470,12 @@ namespace System.Security.Cryptography.X509Certificates
                             throw new InvalidOperationException(SR.Cryptography_CertReq_RSAPaddingRequired);
                         }
 
-                        RSA? rsa = issuerCertificate.GetRSAPrivateKey();
+                        RS rsa = issuerCertificate.GetRSAPrivateKey();
                         key = rsa;
                         generator = X509SignatureGenerator.CreateForRSA(rsa!, _rsaPadding);
                         break;
                     case Oids.EcPublicKey:
-                        ECDsa? ecdsa = issuerCertificate.GetECDsaPrivateKey();
+                        ECDs ecdsa = issuerCertificate.GetECDsaPrivateKey();
                         key = ecdsa;
                         generator = X509SignatureGenerator.CreateForECDsa(ecdsa!);
                         break;
@@ -550,7 +557,7 @@ namespace System.Security.Cryptography.X509Certificates
                 {
                     Algorithm = new AlgorithmIdentifierAsn
                     {
-                        Algorithm = PublicKey.Oid!.Value!,
+                        Algorithm = PublicKey.Oid.Value,
                         Parameters = PublicKey.EncodedParameters.RawData,
                     },
                     SubjectPublicKey = PublicKey.EncodedKeyValue.RawData,
@@ -561,7 +568,7 @@ namespace System.Security.Cryptography.X509Certificates
 
             if (CertificateExtensions.Count > 0)
             {
-                HashSet<string?> usedOids = new HashSet<string?>(CertificateExtensions.Count);
+                HashSet<strin> usedOids = new HashSet<strin>(CertificateExtensions.Count);
                 List<X509ExtensionAsn> extensionAsns = new List<X509ExtensionAsn>(CertificateExtensions.Count);
 
                 // An interesting quirk of skipping null values here is that
@@ -575,7 +582,7 @@ namespace System.Security.Cryptography.X509Certificates
                         continue;
                     }
 
-                    if (!usedOids.Add(extension.Oid!.Value))
+                    if (!usedOids.Add(extension.Oid.Value))
                     {
                         throw new InvalidOperationException(
                             SR.Format(SR.Cryptography_CertReq_DuplicateExtension, extension.Oid.Value));

@@ -8,14 +8,14 @@ using System.Collections.Generic;
 using System.Formats.Asn1;
 using System.Runtime.InteropServices;
 
-namespace System.Security.Cryptography.X509Certificates.Asn1
+namespace Net5.System.Security.Cryptography.X509Certificates.Asn1
 {
     [StructLayout(LayoutKind.Sequential)]
     internal partial struct DistributionPointAsn
     {
-        internal System.Security.Cryptography.X509Certificates.Asn1.DistributionPointNameAsn? DistributionPoint;
-        internal System.Security.Cryptography.X509Certificates.Asn1.ReasonFlagsAsn? Reasons;
-        internal System.Security.Cryptography.Asn1.GeneralNameAsn[]? CRLIssuer;
+        internal System.Security.Cryptography.X509Certificates.Asn1.DistributionPointNameAs DistributionPoint;
+        internal System.Security.Cryptography.X509Certificates.Asn1.ReasonFlagsAs Reasons;
+        internal System.Security.Cryptography.Asn1.GeneralNameAsn[ CRLIssuer;
 
         internal void Encode(AsnWriter writer)
         {

@@ -8,11 +8,10 @@ using System.Text;
 using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using Net5.Internal.Cryptography.Pal;
 
-using Internal.Cryptography;
-using Internal.Cryptography.Pal;
-
-namespace System.Security.Cryptography.X509Certificates
+namespace Net5.System.Security.Cryptography.X509Certificates
 {
     public sealed class X509KeyUsageExtension : X509Extension
     {

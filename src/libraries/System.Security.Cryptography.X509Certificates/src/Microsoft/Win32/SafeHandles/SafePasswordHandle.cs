@@ -2,11 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
+using Microsoft.Win32.SafeHandles;
 using System;
 using System.Runtime.InteropServices;
 using System.Security;
 
-namespace Microsoft.Win32.SafeHandles
+namespace Net5.Microsoft.Win32.SafeHandles
 {
     /// <summary>
     /// Wrap a string- or SecureString-based object. A null value indicates IntPtr.Zero should be used.
@@ -15,7 +16,7 @@ namespace Microsoft.Win32.SafeHandles
     {
         internal int Length { get; private set; }
 
-        public SafePasswordHandle(string? password)
+        public SafePasswordHandle(string password)
             : base(ownsHandle: true)
         {
             if (password != null)
@@ -25,7 +26,7 @@ namespace Microsoft.Win32.SafeHandles
             }
         }
 
-        public SafePasswordHandle(SecureString? password)
+        public SafePasswordHandle(SecureString password)
             : base(ownsHandle: true)
         {
             if (password != null)
@@ -70,7 +71,7 @@ namespace Microsoft.Win32.SafeHandles
             SafeHandleCache<SafePasswordHandle>.GetInvalidHandle(
                 () =>
                 {
-                    var handle = new SafePasswordHandle((string?)null);
+                    var handle = new SafePasswordHandle((string)null);
                     handle.handle = (IntPtr)(-1);
                     return handle;
                 });

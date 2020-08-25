@@ -9,9 +9,9 @@ using System.Diagnostics;
 using System.Globalization;
 using System.Runtime.InteropServices;
 
-using Internal.Cryptography;
+using System.Security.Cryptography;
 
-namespace System.Security.Cryptography.X509Certificates
+namespace Net5.System.Security.Cryptography.X509Certificates
 {
     public class X509Extension : AsnEncodedData
     {
@@ -21,7 +21,7 @@ namespace System.Security.Cryptography.X509Certificates
         }
 
         public X509Extension(AsnEncodedData encodedExtension, bool critical)
-            : this(encodedExtension.Oid!, encodedExtension.RawData, critical)
+            : this(encodedExtension.Oid, encodedExtension.RawData, critical)
         {
         }
 
@@ -47,7 +47,7 @@ namespace System.Security.Cryptography.X509Certificates
             if (asnEncodedData == null)
                 throw new ArgumentNullException(nameof(asnEncodedData));
 
-            X509Extension? extension = asnEncodedData as X509Extension;
+            X509Extension extension = asnEncodedData as X509Extension;
             if (extension == null)
                 throw new ArgumentException(SR.Cryptography_X509_ExtensionMismatch);
             base.CopyFrom(asnEncodedData);

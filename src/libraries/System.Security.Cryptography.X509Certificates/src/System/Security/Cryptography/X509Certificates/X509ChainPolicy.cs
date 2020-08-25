@@ -2,7 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-namespace System.Security.Cryptography.X509Certificates
+using System;
+using System.Security.Cryptography;
+using Net5.System.Security.Cryptography;
+using Net5.System.Security.Cryptography.X509Certificates;
+
+namespace Net5.System.Security.Cryptography.X509Certificates
 {
     public sealed class X509ChainPolicy
     {
@@ -10,10 +15,10 @@ namespace System.Security.Cryptography.X509Certificates
         private X509RevocationFlag _revocationFlag;
         private X509VerificationFlags _verificationFlags;
         private X509ChainTrustMode _trustMode;
-        internal OidCollection? _applicationPolicy;
-        internal OidCollection? _certificatePolicy;
-        internal X509Certificate2Collection? _extraStore;
-        internal X509Certificate2Collection? _customTrustStore;
+        internal OidCollection _applicationPolicy;
+        internal OidCollection _certificatePolicy;
+        internal X509Certificate2Collection _extraStore;
+        internal X509Certificate2Collection _customTrustStore;
 
         public X509ChainPolicy()
         {
@@ -31,13 +36,13 @@ namespace System.Security.Cryptography.X509Certificates
         /// </value>
         public bool DisableCertificateDownloads { get; set; }
 
-        public OidCollection ApplicationPolicy => _applicationPolicy ??= new OidCollection();
+        public OidCollection ApplicationPolicy => _applicationPolicy ?? (_applicationPolicy = new OidCollection());
 
-        public OidCollection CertificatePolicy => _certificatePolicy ??= new OidCollection();
+        public OidCollection CertificatePolicy => _certificatePolicy ?? (_certificatePolicy = new OidCollection());
 
-        public X509Certificate2Collection ExtraStore => _extraStore ??= new X509Certificate2Collection();
+        public X509Certificate2Collection ExtraStore => _extraStore ?? (_extraStore = new X509Certificate2Collection());
 
-        public X509Certificate2Collection CustomTrustStore => _customTrustStore ??= new X509Certificate2Collection();
+        public X509Certificate2Collection CustomTrustStore => _customTrustStore ?? (_customTrustStore = new X509Certificate2Collection());
 
         public X509RevocationMode RevocationMode
         {

@@ -2,15 +2,16 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Internal.Cryptography;
-using Internal.Cryptography.Pal;
+using Net5.Internal.Cryptography.Pal;
+using System;
+using System.Security.Cryptography;
 
-namespace System.Security.Cryptography.X509Certificates
+namespace Net5.System.Security.Cryptography.X509Certificates
 {
     public sealed class PublicKey
     {
         private readonly Oid _oid;
-        private AsymmetricAlgorithm? _key = null;
+        private AsymmetricAlgorithm _key = null;
 
         public PublicKey(Oid oid, AsnEncodedData parameters, AsnEncodedData keyValue)
         {

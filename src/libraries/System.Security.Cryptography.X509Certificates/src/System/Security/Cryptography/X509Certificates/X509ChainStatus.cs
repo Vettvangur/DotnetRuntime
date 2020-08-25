@@ -6,13 +6,12 @@ using System;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 
-namespace System.Security.Cryptography.X509Certificates
+namespace Net5.System.Security.Cryptography.X509Certificates
 {
     public struct X509ChainStatus
     {
         public X509ChainStatusFlags Status { get; set; }
 
-        [AllowNull]
         public string StatusInformation
         {
             get
@@ -27,6 +26,6 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        private string? _statusInformation;
+        private string _statusInformation;
     }
 }

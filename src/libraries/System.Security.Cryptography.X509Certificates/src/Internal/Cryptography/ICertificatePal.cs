@@ -5,11 +5,12 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
-using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
+using Net5.System.Security.Cryptography;
+using Net5.System.Security.Cryptography.X509Certificates;
 using System.Text;
+using System.Security.Cryptography;
 
-namespace Internal.Cryptography
+namespace Net5.Internal.Cryptography
 {
     [StructLayout(LayoutKind.Sequential)]
     internal struct PolicyData
@@ -31,9 +32,9 @@ namespace Internal.Cryptography
         X500DistinguishedName SubjectName { get; }
         X500DistinguishedName IssuerName { get; }
         IEnumerable<X509Extension> Extensions { get; }
-        RSA? GetRSAPrivateKey();
-        DSA? GetDSAPrivateKey();
-        ECDsa? GetECDsaPrivateKey();
+        RSA GetRSAPrivateKey();
+        DSA GetDSAPrivateKey();
+        ECDsa GetECDsaPrivateKey();
         string GetNameInfo(X509NameType nameType, bool forIssuer);
         void AppendPrivateKeyInfo(StringBuilder sb);
         ICertificatePal CopyWithPrivateKey(DSA privateKey);

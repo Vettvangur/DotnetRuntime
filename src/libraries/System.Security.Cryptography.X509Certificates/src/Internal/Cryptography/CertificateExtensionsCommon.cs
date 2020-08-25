@@ -6,15 +6,17 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Security.Cryptography;
-using System.Security.Cryptography.X509Certificates;
+using Net5.System;
+using Net5.System.Security.Cryptography;
+using Net5.System.Security.Cryptography.X509Certificates;
 
-namespace Internal.Cryptography.Pal
+namespace Net5.Internal.Cryptography.Pal
 {
     internal static class CertificateExtensionsCommon
     {
-        public static T? GetPublicKey<T>(
+        public static T GetPublicKey<T>(
             this X509Certificate2 certificate,
-            Predicate<X509Certificate2>? matchesConstraints = null)
+            Predicate<X509Certificate2> matchesConstraints = null)
             where T : AsymmetricAlgorithm
         {
             if (certificate == null)
@@ -34,9 +36,9 @@ namespace Internal.Cryptography.Pal
             return (T)(X509Pal.Instance.DecodePublicKey(algorithmOid, rawEncodedKeyValue, rawEncodedParameters, certificate.Pal));
         }
 
-        public static T? GetPrivateKey<T>(
+        public static T GetPrivateKey<T>(
             this X509Certificate2 certificate,
-            Predicate<X509Certificate2>? matchesConstraints = null)
+            Predicate<X509Certificate2> matchesConstraints = null)
             where T : AsymmetricAlgorithm
         {
             if (certificate == null)
@@ -50,13 +52,13 @@ namespace Internal.Cryptography.Pal
                 return null;
 
             if (typeof(T) == typeof(RSA))
-                return (T?)(object?)certificate.Pal.GetRSAPrivateKey();
+                return (T)(object)certificate.Pal.GetRSAPrivateKey();
 
             if (typeof(T) == typeof(ECDsa))
-                return (T?)(object?)certificate.Pal.GetECDsaPrivateKey();
+                return (T)(object)certificate.Pal.GetECDsaPrivateKey();
 
             if (typeof(T) == typeof(DSA))
-                return (T?)(object?)certificate.Pal.GetDSAPrivateKey();
+                return (T)(object)certificate.Pal.GetDSAPrivateKey();
 
             Debug.Fail("Expected GetExpectedOidValue() to have thrown before we got here.");
             throw new NotSupportedException(SR.NotSupported_KeyAlgorithm);

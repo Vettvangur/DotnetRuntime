@@ -6,9 +6,9 @@ using System;
 using System.Text;
 using System.Diagnostics;
 using System.Globalization;
-using System.Security.Cryptography;
+using Net5.System.Security.Cryptography;
 
-namespace Internal.Cryptography
+namespace Net5.Internal.Cryptography
 {
     //
     // Error codes for specific throw sites. Defined outside of Internal.Crytography.Pal.Native as some non-Pal code uses these.

@@ -5,11 +5,14 @@
 using System;
 using System.Text;
 using System.Diagnostics;
-using System.Security.Cryptography;
+using Net5.System.Security.Cryptography;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
+using System.Runtime.CompilerServices;
 
-namespace Internal.Cryptography.Pal.Native
+namespace Net5.Internal.Cryptography.Pal.Native
 {
+
     internal static class Helpers
     {
         /// <summary>
@@ -18,7 +21,7 @@ namespace Internal.Cryptography.Pal.Native
         /// appends to the OidCollection while this method is in progress. In such a case, this method guarantees only that this won't create
         /// an unmanaged buffer overflow condition.
         /// </summary>
-        public static SafeHandle ToLpstrArray(this OidCollection? oids, out int numOids)
+        public static SafeHandle ToLpstrArray(this OidCollection oids, out int numOids)
         {
             if (oids == null || oids.Count == 0)
             {
@@ -32,7 +35,7 @@ namespace Internal.Cryptography.Pal.Native
             var oidStrings = new string[oids.Count];
             for (int i = 0; i < oidStrings.Length; i++)
             {
-                oidStrings[i] = oids[i].Value!;
+                oidStrings[i] = oids[i].Value;
             }
 
             unsafe
@@ -56,7 +59,15 @@ namespace Internal.Cryptography.Pal.Native
 
                     pOidPointers[i] = pOidContents;
 
-                    int bytesWritten = Encoding.ASCII.GetBytes(oidString, new Span<byte>(pOidContents, oidString.Length));
+                    int bytesWritten;
+                    ReadOnlySpan<char> chars = oidString.AsSpan();
+                    var bytes = new Span<byte>(pOidContents, oidString.Length);
+                    fixed (char* charsPtr = &MemoryMarshal.GetReference(chars))
+                    fixed (byte* bytesPtr = &MemoryMarshal.GetReference(bytes))
+                    {
+                        bytesWritten = Encoding.ASCII.GetBytes(charsPtr, chars.Length, bytesPtr, bytes.Length);
+                    }
+
                     Debug.Assert(bytesWritten == oidString.Length);
 
                     pOidContents[oidString.Length] = 0;
@@ -70,7 +81,7 @@ namespace Internal.Cryptography.Pal.Native
 
         public static byte[] ValueAsAscii(this Oid oid)
         {
-            return Encoding.ASCII.GetBytes(oid.Value!);
+            return Encoding.ASCII.GetBytes(oid.Value);
         }
 
         public unsafe delegate void DecodedObjectReceiver(void* pvDecodedObject, int cbDecodedObject);

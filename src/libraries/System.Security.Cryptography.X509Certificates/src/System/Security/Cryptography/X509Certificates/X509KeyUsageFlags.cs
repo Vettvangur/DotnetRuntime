@@ -5,7 +5,7 @@
 using System;
 using System.Diagnostics;
 
-namespace System.Security.Cryptography.X509Certificates
+namespace Net5.System.Security.Cryptography.X509Certificates
 {
     //
     // Key Usage flags map the definition in wincrypt.h, so that no mapping will be necessary.

@@ -5,12 +5,15 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Formats.Asn1;
 using System.Globalization;
+using System.Runtime.InteropServices;
 using System.Security.Cryptography;
-using System.Security.Cryptography.Asn1;
+using Net5.System;
+using Net5.System.Formats.Asn1;
+using Net5.System.Security.Cryptography;
+using Net5.System.Security.Cryptography.Asn1;
 
-namespace Internal.Cryptography
+namespace Net5.Internal.Cryptography
 {
     internal static partial class Helpers
     {
@@ -43,7 +46,7 @@ namespace Internal.Cryptography
         {
             int whitespaceCount = 0;
 
-            ReadOnlySpan<char> s = hexString;
+            ReadOnlySpan<char> s = hexString.AsSpan();
 
             if (s.Length != 0 && s[0] == '\u200E')
             {
@@ -108,7 +111,7 @@ namespace Internal.Cryptography
                 return 0xFF;
         }
 
-        public static bool ContentsEqual(this byte[]? a1, byte[]? a2)
+        public static bool ContentsEqual(this byte[] a1, byte[] a2)
         {
             if (a1 == null)
             {
@@ -294,15 +297,15 @@ namespace Internal.Cryptography
     internal struct PinAndClear : IDisposable
     {
         private byte[] _data;
-        private System.Runtime.InteropServices.GCHandle _gcHandle;
+        private GCHandle _gcHandle;
 
         internal static PinAndClear Track(byte[] data)
         {
             return new PinAndClear
             {
-                _gcHandle = System.Runtime.InteropServices.GCHandle.Alloc(
+                _gcHandle = GCHandle.Alloc(
                     data,
-                    System.Runtime.InteropServices.GCHandleType.Pinned),
+                    GCHandleType.Pinned),
                 _data = data,
             };
         }

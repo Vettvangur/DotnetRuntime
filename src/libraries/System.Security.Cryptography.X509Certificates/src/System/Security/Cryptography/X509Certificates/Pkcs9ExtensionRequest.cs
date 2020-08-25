@@ -4,9 +4,9 @@
 
 using System.Collections.Generic;
 using System.Formats.Asn1;
-using System.Security.Cryptography.Asn1;
+using Net5.System.Security.Cryptography.Asn1;
 
-namespace System.Security.Cryptography.X509Certificates
+namespace Net5.System.Security.Cryptography.X509Certificates
 {
     internal sealed class Pkcs9ExtensionRequest : X501Attribute
     {
