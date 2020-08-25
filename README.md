@@ -1,3 +1,35 @@
+# Vettvangur project aim
+To backport Net5 X509ChainTrustMode.CustomRootTrust feature to Net472
+the intent is to allow users to create X509Chain and build with a custom root
+Use case: Azure app services
+
+# Vettvangur changes
+namespace find replace
+using find replace
+move linked files to project directory
+exclude from project unused code
+Work around lesser span support
+    .CloneByteArray() -> .Clone() + cast 
+        Similar to Net5 CloneByteArray source code
+    ToArray since string constructor doesn't yet support spans
+refactor C# 8.0 features such as 
+    remove all nullable reference code (find replace ? and !)
+    inverse switch
+    inline static functions
+
+ToLpstrArray
+    code inlined from Net5 source and use MemoryMarshal.GetReference in place of GetNonNullRef
+
+## Notes
+Can't exclude x509certificate2, need to access internal member pal
+proj only includes windows Pal code
+
+Need Net472 for
+	SafeNCryptKeyHandle
+    Maybe we can go further and grab it's source but this will do for now
+
+
+
 # .NET Runtime
 
 [![Build Status](https://dnceng.visualstudio.com/public/_apis/build/status/dotnet/runtime/runtime?branchName=master)](https://dnceng.visualstudio.com/public/_build/latest?definitionId=686&branchName=master)
