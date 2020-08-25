@@ -210,23 +210,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="Common\System\Security\Cryptography\Asn1\asn.xsd">
-      <SubType>Designer</SubType>
-    </None>
     <Compile Include="System.Formats.Asn1.SR.cs" />
     <None Include="Net5.X509Certificates.nuspec" />
     <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Common\System\Security\Cryptography\Asn1\AlgorithmIdentifierAsn.xml" />
-    <Content Include="Common\System\Security\Cryptography\Asn1\AttributeAsn.xml" />
-    <Content Include="Common\System\Security\Cryptography\Asn1\DirectoryStringAsn.xml" />
-    <Content Include="Common\System\Security\Cryptography\Asn1\EdiPartyNameAsn.xml" />
-    <Content Include="Common\System\Security\Cryptography\Asn1\GeneralNameAsn.xml" />
-    <Content Include="Common\System\Security\Cryptography\Asn1\OtherNameAsn.xml" />
-    <Content Include="Common\System\Security\Cryptography\Asn1\PssParamsAsn.xml" />
-    <Content Include="Common\System\Security\Cryptography\Asn1\SubjectPublicKeyInfoAsn.xml" />
-    <Content Include="Common\System\Security\Cryptography\Asn1\X509ExtensionAsn.xml" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\Strings.resx" />
